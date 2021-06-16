@@ -46,3 +46,10 @@ button:hover,
 button:active {
   transform: scale(1.05);
 }
+
+.output {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
