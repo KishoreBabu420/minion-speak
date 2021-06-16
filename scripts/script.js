@@ -1,14 +1,32 @@
 'use strict';
 
-let btnTranslate = document.getElementById('btn-translate');
+const btnTranslate = document.getElementById('btn-translate');
 
-let userInput = document.getElementById('user-input');
+const userInput = document.getElementById('user-input');
 
+const output = document.getElementById('output');
+
+const url = 'https://api.funtranslations.com/translate/minion.json';
 //functions
 
 const clickHandler = function () {
   const textToTranslate = userInput.value;
-  console.log(textToTranslate);
+  //calling server
+  fetch(getTranslationURL(textToTranslate))
+    .then((response) => response.json())
+    .then((json) => {
+      let translatedText = json.contents.translated;
+      output.innerText = translatedText;
+    })
+    .catch(errorHandler);
+};
+
+const getTranslationURL = function (text) {
+  return url + '?text=' + text;
+};
+
+const errorHandler = function (error) {
+  console.log('error occurred', error);
 };
 
 btnTranslate.addEventListener('click', clickHandler);
